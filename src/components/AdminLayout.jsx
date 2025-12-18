@@ -25,6 +25,13 @@ function AdminLayout() {
     return location.pathname.startsWith(path)
   }
 
+  // Close sidebar on mobile when route changes
+  const handleNavClick = () => {
+    if (window.innerWidth <= 768) {
+      setSidebarOpen(false)
+    }
+  }
+
   return (
     <div className="admin-layout">
       {/* Sidebar */}
@@ -46,6 +53,7 @@ function AdminLayout() {
               key={item.path}
               to={item.path}
               className={`nav-item ${isActive(item.path, item.exact) ? 'active' : ''}`}
+              onClick={handleNavClick}
             >
               <span className="nav-icon">{item.icon}</span>
               {sidebarOpen && <span className="nav-label">{item.label}</span>}
@@ -69,10 +77,20 @@ function AdminLayout() {
         </div>
       </aside>
 
+      {/* Mobile Overlay */}
+      {sidebarOpen && <div className="mobile-overlay" onClick={() => setSidebarOpen(false)} />}
+
       {/* Main Content */}
       <main className="admin-main">
         <header className="admin-header">
           <div className="header-left">
+            <button
+              className="mobile-toggle"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open menu"
+            >
+              ☰
+            </button>
             <h1>Admin Panel</h1>
           </div>
           <div className="header-right">

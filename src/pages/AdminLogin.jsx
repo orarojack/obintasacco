@@ -31,7 +31,8 @@ function AdminLogin() {
             justifyContent: 'center',
             alignItems: 'center',
             minHeight: '100vh',
-            background: '#f3f4f6'
+            background: '#f3f4f6',
+            padding: '1rem'
         }}>
             <div className="login-card" style={{
                 background: 'white',

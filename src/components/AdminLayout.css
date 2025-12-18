@@ -188,18 +188,72 @@
   overflow-y: auto;
 }
 
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #0f172a;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-right: 1rem;
+}
+
+.mobile-toggle:hover {
+  background: #f1f5f9;
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 900;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.1s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-overlay {
+    display: block;
+  }
+
   .admin-sidebar {
     transform: translateX(-100%);
+    box-shadow: none;
   }
 
   .admin-sidebar.open {
     transform: translateX(0);
+    width: 280px; /* Force width on mobile open */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-toggle {
+    display: none; /* Hide internal sidebar toggle on mobile */
   }
 
   .admin-main {
-    margin-left: 0;
+    margin-left: 0 !important; /* Override all margin logic */
+    width: 100%;
   }
 
   .admin-content {
