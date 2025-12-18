@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Link, useLocation, Outlet } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import './AdminLayout.css'
 
 function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const location = useLocation()
+  const { logout } = useAuth()
 
   const menuItems = [
     { path: '/admin', icon: '📊', label: 'Dashboard', exact: true },
@@ -29,7 +31,7 @@ function AdminLayout() {
       <aside className={`admin-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
           <h2>Obinta Sacco</h2>
-          <button 
+          <button
             className="sidebar-toggle"
             onClick={() => setSidebarOpen(!sidebarOpen)}
             aria-label="Toggle sidebar"
@@ -37,7 +39,7 @@ function AdminLayout() {
             {sidebarOpen ? '←' : '→'}
           </button>
         </div>
-        
+
         <nav className="sidebar-nav">
           {menuItems.map((item) => (
             <Link
@@ -56,6 +58,14 @@ function AdminLayout() {
             <span className="nav-icon">🏠</span>
             {sidebarOpen && <span className="nav-label">Back to Site</span>}
           </Link>
+          <button
+            onClick={logout}
+            className="back-to-site"
+            style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer', textAlign: 'left', marginTop: '0.5rem' }}
+          >
+            <span className="nav-icon">🚪</span>
+            {sidebarOpen && <span className="nav-label">Logout</span>}
+          </button>
         </div>
       </aside>
 
